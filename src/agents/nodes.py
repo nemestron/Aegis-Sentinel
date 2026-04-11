@@ -3,12 +3,14 @@ Filtering, Authentication, Synthesis & Formatting Personas
 Author: Dhiraj Malwade
 """
 import os
+from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from src.state import AgentState
 from src.memory.vector_store import search_memory
 
-# Ensure API Key is available
+# Load environment variables IMMEDIATELY at the module level
+load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 
 # Initialize LLMs with the requested fallback strategy
@@ -35,7 +37,6 @@ def triage_node(state: AgentState) -> dict:
 
 def auth_node(state: AgentState) -> dict:
     """Verifies facts against ChromaDB context and detects hallucinations."""
-    # Fetch top 6 documents as requested
     results = search_memory(state.ticker, n_results=6)
     docs = results.get('documents', [[]])[0]
     metas = results.get('metadatas', [[]])[0]
@@ -43,7 +44,6 @@ def auth_node(state: AgentState) -> dict:
     if not docs:
         return {"verified": False, "retrieved_docs": [], "source_links": []}
 
-    # Extract unique source links
     source_links = list(set([m.get("source", "") for m in metas if m.get("source")]))
     context = "\n\n".join(docs)
     

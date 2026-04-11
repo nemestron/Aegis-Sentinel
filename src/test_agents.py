@@ -4,7 +4,6 @@ Author: Dhiraj Malwade
 """
 import sys
 import os
-from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -15,11 +14,9 @@ from src.state import AgentState
 from src.agents.nodes import triage_node, auth_node, synthesis_node, formatting_node
 
 def test_cognitive_nodes():
-    load_dotenv()
-    ticker = "BARC.L"
+    ticker = "NVDA"
     print(f"[*] Initializing cognitive node test for {ticker}...")
     
-    # 1. Fetch live data & Ingest to memory
     print("[*] Acquiring and embedding fresh intelligence...")
     try:
         market_data = fetch_ticker_info(ticker)
@@ -38,10 +35,8 @@ def test_cognitive_nodes():
         print("[-] Critical Failure: No data retrieved to test nodes.")
         return
 
-    # 2. Construct State
     state = AgentState(ticker=ticker, raw_data=raw_text)
     
-    # 3. Simulate sequential graph execution
     print("[*] Activating Triage Node (llama-3.1-8b-instant)...")
     triage_update = triage_node(state)
     state.raw_data = triage_update.get("raw_data", state.raw_data)
