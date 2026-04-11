@@ -1,2 +1,3 @@
 [server]
-folderWatchBlacklist = ['.venv']
+fileWatcherType = "none"
+headless = true
