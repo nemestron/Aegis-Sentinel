@@ -54,7 +54,6 @@ def generate_pdf(state_data: dict) -> bytes:
     pdf.cell(0, 10, "Intelligence Brief:", new_x="LMARGIN", new_y="NEXT")
     pdf.set_font("helvetica", size=11)
     
-    # Strip markdown symbols for clean PDF rendering
     clean_brief = re.sub(r'[*_#`]', '', brief)
     pdf.multi_cell(0, 6, clean_brief)
     pdf.ln(5)
@@ -66,14 +65,11 @@ def generate_pdf(state_data: dict) -> bytes:
     for link in sources:
         pdf.cell(0, 6, link, link=link, new_x="LMARGIN", new_y="NEXT")
 
-    # fpdf2 output() returns a bytearray
     return bytes(pdf.output())
 
-# UI Layout
 st.title("Aegis Sentinel Command Dashboard")
 st.markdown("Autonomous Financial Intelligence & Cryptographic Verification System")
 
-# State Management for Thread Isolation
 if "executor" not in st.session_state:
     st.session_state.executor = ThreadPoolExecutor(max_workers=1)
 if "future" not in st.session_state:
@@ -88,17 +84,14 @@ if st.button("Run Analysis"):
         st.warning("Please enter a valid ticker symbol.")
     else:
         st.session_state.result = None
-        # Dispatch the blocking graph execution to the background thread
         st.session_state.future = st.session_state.executor.submit(invoke_graph_autonomous, ticker_input)
 
-# Polling Mechanism
 if st.session_state.future and not st.session_state.future.done():
     with st.status("Acquiring Intelligence & Authenticating... Please wait.", expanded=True) as status:
         st.write("Traversing Cognitive Graph...")
         time.sleep(1.5)
         st.rerun()
 
-# Thread Resolution
 if st.session_state.future and st.session_state.future.done() and not st.session_state.result:
     try:
         st.session_state.result = st.session_state.future.result()
@@ -107,7 +100,6 @@ if st.session_state.future and st.session_state.future.done() and not st.session
     finally:
         st.session_state.future = None
 
-# Results Display
 if st.session_state.result:
     state = st.session_state.result
     st.success("Intelligence Acquisition Complete.")
