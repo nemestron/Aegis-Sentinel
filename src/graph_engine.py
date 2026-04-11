@@ -1,5 +1,6 @@
 """
 Autonomous State Machine Graph Engine
+Author: Dhiraj Malwade
 """
 import os
 import uuid
@@ -18,10 +19,8 @@ checkpoint_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "
 db_path = os.path.join(checkpoint_dir, "aegis.db")
 
 def delivery_node(state: AgentState) -> dict:
-    """Formats the final intelligence package and transmits via Telegram."""
     log.info(f"Initiating delivery sequence for {state.ticker}")
     
-    # Prefix the report with the enriched data block
     message = f"*AEGIS INTELLIGENCE: {state.company_name or state.ticker}*\n"
     message += f"Current Price: {state.current_price}\n"
     message += f"24h Change: {state.change_percent}\n"
@@ -30,7 +29,7 @@ def delivery_node(state: AgentState) -> dict:
     
     success = send_telegram_message(message)
     if not success:
-        log.error("Delivery sequence failed.")
+        log.error("Delivery sequence aborted due to transmission failure.")
         
     return {}
 
