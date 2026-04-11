@@ -1,7 +1,12 @@
 """
 Memory & Ingestion Test Script
-Author: Vighnesh Shinde
 """
+import sys
+import os
+
+# Ensure the root project directory is in the Python path to allow absolute imports
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.reconnaissance.market_data import fetch_ticker_info
 from src.reconnaissance.search import fetch_news
 from src.memory.vector_store import ingest_data, search_memory

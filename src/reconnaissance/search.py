@@ -8,7 +8,6 @@ def fetch_news(query: str, max_results: int = 3) -> list[dict]:
     with DDGS() as ddgs:
         news_items = ddgs.news(query, max_results=max_results)
         for item in news_items:
-            # Handle dictionary access safely
             title = item.get('title', 'No Title')
             body = item.get('body', 'No Content')
             url = item.get('url', 'No URL')

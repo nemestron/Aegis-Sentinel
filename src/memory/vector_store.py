@@ -4,8 +4,8 @@ from chromadb.config import Settings
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-# Disable telemetry and set database path
-db_path = os.path.join(os.getcwd(), "local_db")
+# Disable telemetry and set database path safely relative to root
+db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "local_db"))
 client = chromadb.PersistentClient(path=db_path, settings=Settings(anonymized_telemetry=False))
 collection = client.get_or_create_collection(name="aegis_memory")
 
