@@ -21,7 +21,8 @@ def test_cognitive_nodes():
     try:
         market_data = fetch_ticker_info(ticker)
         raw_text = market_data['text']
-        ingest_data(market_data['text'], market_data['url'])
+        # Pass ticker to ensure metadata isolation
+        ingest_data(market_data['text'], market_data['url'], ticker)
     except Exception as e:
         print(f"[-] Market fetch failed: {e}")
         raw_text = ""
@@ -29,7 +30,8 @@ def test_cognitive_nodes():
     news_data = fetch_news(f"{ticker} finance news", max_results=2)
     for news in news_data:
         raw_text += "\n" + news['text']
-        ingest_data(news['text'], news['url'])
+        # Pass ticker to ensure metadata isolation
+        ingest_data(news['text'], news['url'], ticker)
 
     if not raw_text:
         print("[-] Critical Failure: No data retrieved to test nodes.")

@@ -9,7 +9,7 @@ from langchain_core.prompts import PromptTemplate
 from src.state import AgentState
 from src.memory.vector_store import search_memory
 
-# Load environment variables IMMEDIATELY at the module level
+# Load environment variables
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 
@@ -36,8 +36,9 @@ def triage_node(state: AgentState) -> dict:
     return {"raw_data": result.content}
 
 def auth_node(state: AgentState) -> dict:
-    """Verifies facts against ChromaDB context and detects hallucinations."""
-    results = search_memory(state.ticker, n_results=6)
+    """Verifies facts against ChromaDB context, isolated by ticker to prevent cross-contamination."""
+    # Ensure retrieval is strictly locked to the state.ticker
+    results = search_memory(state.ticker, ticker=state.ticker, n_results=6)
     docs = results.get('documents', [[]])[0]
     metas = results.get('metadatas', [[]])[0]
     

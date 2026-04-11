@@ -10,16 +10,16 @@ collection = client.get_or_create_collection(name="aegis_memory")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-def ingest_data(text: str, url: str):
-    """Chunks text, embeds it, and stores it in ChromaDB with source URLs."""
+def ingest_data(text: str, url: str, ticker: str):
+    """Chunks text, embeds it, and stores it in ChromaDB with strict ticker metadata."""
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     chunks = splitter.split_text(text)
     
     if not chunks:
         return
 
-    ids = [f"{url}_{i}" for i in range(len(chunks))]
-    metadatas = [{"source": url} for _ in range(len(chunks))]
+    ids = [f"{ticker}_{url}_{i}" for i in range(len(chunks))]
+    metadatas = [{"source": url, "ticker": ticker} for _ in range(len(chunks))]
     
     embeds = embeddings.embed_documents(chunks)
     collection.upsert(
@@ -29,11 +29,12 @@ def ingest_data(text: str, url: str):
         ids=ids
     )
 
-def search_memory(query: str, n_results: int = 3) -> dict:
-    """Performs semantic search and returns documents and metadata."""
+def search_memory(query: str, ticker: str, n_results: int = 3) -> dict:
+    """Performs semantic search isolated strictly to the requested ticker."""
     query_embed = embeddings.embed_query(query)
     results = collection.query(
         query_embeddings=[query_embed],
-        n_results=n_results
+        n_results=n_results,
+        where={"ticker": ticker}
     )
     return results
