@@ -1,5 +1,6 @@
 """
 Memory & Ingestion Test Script
+Author: Dhiraj Malwade
 """
 import sys
 import os
@@ -16,21 +17,29 @@ def test_pipeline():
     print(f"[*] Fetching live data for {ticker}...")
     
     # 1. Fetch Market Data
-    market_data = fetch_ticker_info(ticker)
-    print(f"[+] Retrieved Market Data from: {market_data['url']}")
-    ingest_data(market_data['text'], market_data['url'])
+    try:
+        market_data = fetch_ticker_info(ticker)
+        print(f"[+] Retrieved Market Data from: {market_data['url']}")
+        ingest_data(market_data['text'], market_data['url'])
+    except Exception as e:
+        print(f"[-] Failed to fetch market data: {e}")
     
     # 2. Fetch News Data
-    news_data = fetch_news(f"{ticker} finance news", max_results=2)
-    for news in news_data:
-        print(f"[+] Retrieved News from: {news['url']}")
-        ingest_data(news['text'], news['url'])
+    try:
+        news_data = fetch_news(f"{ticker} finance news", max_results=2)
+        if not news_data:
+            print("[-] News fetch returned empty. Network might be blocking requests.")
+        for news in news_data:
+            print(f"[+] Retrieved News from: {news['url']}")
+            ingest_data(news['text'], news['url'])
+    except Exception as e:
+        print(f"[-] Failed to fetch news data: {e}")
         
     # 3. Test Retrieval
     query = "What is the business summary and current news for Barclays?"
     print(f"\n[*] Querying ChromaDB: '{query}'")
     
-    results = search_memory(query, n_results=2)
+    results = search_memory(query, n_results=4)
     
     print("\n--- RETRIEVED DOCUMENTS ---")
     docs = results.get('documents', [[]])[0]
