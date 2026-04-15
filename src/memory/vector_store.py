@@ -5,6 +5,9 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "local_db"))
+# Critical Cloud Fix: Ensure directory exists
+os.makedirs(db_path, exist_ok=True)
+
 client = chromadb.PersistentClient(path=db_path, settings=Settings(anonymized_telemetry=False))
 collection = client.get_or_create_collection(name="aegis_memory")
 

@@ -16,10 +16,10 @@ from src.delivery.transmission import send_telegram_message
 from src.utils.logger import log
 
 checkpoint_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "checkpoints"))
-db_path = os.path.join(checkpoint_dir, "aegis.db")
-
-# Critical Cloud Fix: Ensure the directory exists before SQLite tries to open the file
+# Critical Cloud Fix: Ensure directory exists
 os.makedirs(checkpoint_dir, exist_ok=True)
+
+db_path = os.path.join(checkpoint_dir, "aegis.db")
 
 def delivery_node(state: AgentState) -> dict:
     if os.getenv("AEGIS_SUPPRESS_DELIVERY") == "true":
