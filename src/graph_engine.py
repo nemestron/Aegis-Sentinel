@@ -18,6 +18,9 @@ from src.utils.logger import log
 checkpoint_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "checkpoints"))
 db_path = os.path.join(checkpoint_dir, "aegis.db")
 
+# Critical Cloud Fix: Ensure the directory exists before SQLite tries to open the file
+os.makedirs(checkpoint_dir, exist_ok=True)
+
 def delivery_node(state: AgentState) -> dict:
     if os.getenv("AEGIS_SUPPRESS_DELIVERY") == "true":
         log.info(f"Delivery sequence suppressed for {state.ticker} (Scheduler Mode active).")
