@@ -1,0 +1,76 @@
+2026-04-11 19:09:43,728 - INFO - Commencing Autonomous Intelligence Acquisition for: BARC.L
+2026-04-11 19:09:49,086 - WARNING - News fetch returned empty. Network block active.
+2026-04-11 19:09:49,088 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-11 19:09:50,635 - INFO - Initiating delivery sequence for BARC.L
+2026-04-11 19:09:50,636 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 19:09:53,213 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 19:09:55,783 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 19:13:12,827 - INFO - Commencing Autonomous Intelligence Acquisition for: BARC.L
+2026-04-11 19:13:18,248 - WARNING - News fetch returned empty. Network block active.
+2026-04-11 19:13:18,251 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-11 19:13:19,542 - INFO - Initiating delivery sequence for BARC.L
+2026-04-11 19:13:19,547 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 19:13:20,074 - WARNING - Telegram rejected Markdown formatting. Applying plain-text fallback.
+2026-04-11 19:13:20,831 - INFO - Transmission successful.
+2026-04-11 19:13:20,837 - INFO - Graph Execution Complete.
+2026-04-11 19:18:44,095 - INFO - Commencing Autonomous Intelligence Acquisition for: BARC.L
+2026-04-11 19:18:50,028 - WARNING - News fetch returned empty. Network block active.
+2026-04-11 19:18:50,028 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-11 19:18:51,570 - INFO - Initiating delivery sequence for BARC.L
+2026-04-11 19:18:51,570 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 19:18:52,094 - WARNING - Telegram rejected dialect formatting. Applying clean plain-text fallback.
+2026-04-11 19:18:52,875 - INFO - Transmission successful.
+2026-04-11 19:18:52,875 - INFO - Graph Execution Complete.
+2026-04-11 19:30:14,838 - INFO - Commencing Autonomous Intelligence Acquisition for: BARC.L
+2026-04-11 19:30:19,996 - WARNING - News fetch returned empty. Network block active.
+2026-04-11 19:30:19,998 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-11 19:30:21,586 - INFO - Initiating delivery sequence for BARC.L
+2026-04-11 19:30:21,586 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 19:30:22,180 - WARNING - Telegram rejected dialect formatting. Applying clean plain-text fallback.
+2026-04-11 19:30:23,162 - INFO - Transmission successful.
+2026-04-11 19:30:23,176 - INFO - Graph Execution Complete.
+2026-04-11 20:52:11,085 - INFO - Commencing Autonomous Intelligence Acquisition for: APPLE
+2026-04-11 20:52:17,844 - WARNING - News fetch returned empty. Network block active.
+2026-04-11 20:52:17,845 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-11 20:52:20,042 - INFO - Initiating delivery sequence for APPLE
+2026-04-11 20:52:20,048 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 20:52:21,122 - WARNING - Telegram rejected dialect formatting. Applying clean plain-text fallback.
+2026-04-11 20:52:21,989 - INFO - Transmission successful.
+2026-04-11 20:52:22,002 - INFO - Graph Execution Complete.
+2026-04-11 21:00:57,601 - INFO - Commencing Autonomous Intelligence Acquisition for: BARC.L
+2026-04-11 21:01:03,976 - WARNING - News fetch returned empty. Network block active.
+2026-04-11 21:01:03,976 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-11 21:01:05,884 - INFO - Initiating delivery sequence for BARC.L
+2026-04-11 21:01:05,888 - INFO - Transmitting compiled report to Telegram network...
+2026-04-11 21:01:06,501 - WARNING - Telegram rejected dialect formatting. Applying clean plain-text fallback.
+2026-04-11 21:01:07,362 - INFO - Transmission successful.
+2026-04-11 21:01:07,393 - INFO - Graph Execution Complete.
+2026-04-15 09:18:47,685 - INFO - Commencing Autonomous Intelligence Acquisition for: ^NSEI
+2026-04-15 09:18:54,580 - WARNING - News fetch rate limited or blocked. Proceeding with partial intelligence. Details: RetryError[<Future at 0x206a07c2510 state=finished raised TypeError>]
+2026-04-15 09:18:54,582 - WARNING - News fetch returned empty. Network block active.
+2026-04-15 09:18:54,582 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-15 09:18:55,818 - INFO - Delivery sequence suppressed for ^NSEI (Scheduler Mode active).
+2026-04-15 09:18:55,830 - INFO - Graph Execution Complete.
+2026-04-15 09:18:55,832 - INFO - Commencing Autonomous Intelligence Acquisition for: RELIANCE.NS
+2026-04-15 09:19:00,414 - WARNING - News fetch rate limited or blocked. Proceeding with partial intelligence. Details: RetryError[<Future at 0x206a0822ad0 state=finished raised TypeError>]
+2026-04-15 09:19:00,414 - WARNING - News fetch returned empty. Network block active.
+2026-04-15 09:19:00,414 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-15 09:19:02,569 - INFO - Delivery sequence suppressed for RELIANCE.NS (Scheduler Mode active).
+2026-04-15 09:19:02,569 - INFO - Graph Execution Complete.
+2026-04-15 09:19:02,569 - INFO - Commencing Autonomous Intelligence Acquisition for: AAPL
+2026-04-15 09:19:07,258 - WARNING - News fetch rate limited or blocked. Proceeding with partial intelligence. Details: RetryError[<Future at 0x206a08cd0d0 state=finished raised TypeError>]
+2026-04-15 09:19:07,259 - WARNING - News fetch returned empty. Network block active.
+2026-04-15 09:19:07,261 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-15 09:19:08,936 - INFO - Delivery sequence suppressed for AAPL (Scheduler Mode active).
+2026-04-15 09:19:08,946 - INFO - Graph Execution Complete.
+2026-04-15 09:19:08,952 - INFO - Commencing Autonomous Intelligence Acquisition for: BARC.L
+2026-04-15 09:19:13,475 - WARNING - News fetch rate limited or blocked. Proceeding with partial intelligence. Details: RetryError[<Future at 0x206a092b710 state=finished raised TypeError>]
+2026-04-15 09:19:13,477 - WARNING - News fetch returned empty. Network block active.
+2026-04-15 09:19:13,478 - INFO - State Machine Engaged. Traversing Cognitive Graph...
+2026-04-15 09:19:15,077 - INFO - Delivery sequence suppressed for BARC.L (Scheduler Mode active).
+2026-04-15 09:19:15,088 - INFO - Graph Execution Complete.
+2026-04-15 09:19:19,091 - WARNING - Macro headline fetch failed: RetryError[<Future at 0x206a096f350 state=finished raised TypeError>]
+2026-04-15 09:19:19,093 - INFO - Transmitting compiled report to Telegram network...
+2026-04-15 09:19:19,996 - INFO - Transmission successful.
+2026-04-15 09:58:48,909 - INFO - Transmitting compiled report to Telegram network...
+2026-04-15 09:58:50,093 - INFO - Transmission successful.
