@@ -19,6 +19,10 @@ checkpoint_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "
 db_path = os.path.join(checkpoint_dir, "aegis.db")
 
 def delivery_node(state: AgentState) -> dict:
+    if os.getenv("AEGIS_SUPPRESS_DELIVERY") == "true":
+        log.info(f"Delivery sequence suppressed for {state.ticker} (Scheduler Mode active).")
+        return {}
+        
     log.info(f"Initiating delivery sequence for {state.ticker}")
     
     message = f"*AEGIS INTELLIGENCE: {state.company_name or state.ticker}*\n"
