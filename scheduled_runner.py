@@ -67,7 +67,9 @@ def generate_hourly_brief() -> str:
         for h in headlines:
             title = h.get("title", "No Title")
             url = h.get("url", "#")
+            body = h.get("body", "No summary available.")
             message += f"- [{title}]({url})\n"
+            message += f"  _{body}_\n\n"
     else:
         message += "No macro headlines available at this time.\n"
         

@@ -8,7 +8,6 @@ def _execute_news_fetch(query: str, max_results: int) -> list[dict]:
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     
     with DDGS(headers=headers, timeout=20) as ddgs:
-        # timelimit='d' ensures recent context, passing query constraints for the hour
         news_items = ddgs.news(query, timelimit='d', max_results=max_results)
         if news_items:
             for item in news_items:
@@ -19,7 +18,8 @@ def _execute_news_fetch(query: str, max_results: int) -> list[dict]:
                 results.append({
                     "text": f"News Title: {title}. Content: {body}",
                     "url": url,
-                    "title": title
+                    "title": title,
+                    "body": body
                 })
     return results
 
@@ -32,10 +32,10 @@ def fetch_news(query: str, max_results: int = 2) -> list[dict]:
         return []
 
 def get_market_headlines(query: str = "global finance business news past hour", max_results: int = 2) -> list[dict]:
-    """Fetches exactly 2 top global finance macro headlines from the recent cycle."""
+    """Fetches top global finance macro headlines with context summaries."""
     try:
         raw_news = _execute_news_fetch(query, max_results)
-        return [{"title": n["title"], "url": n["url"]} for n in raw_news]
+        return [{"title": n["title"], "url": n["url"], "body": n.get("body", "")} for n in raw_news]
     except Exception as e:
         log.warning(f"Macro headline fetch failed: {e}")
         return []
