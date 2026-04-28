@@ -18,6 +18,32 @@ load_dotenv()
 
 st.set_page_config(page_title="Aegis Sentinel", layout="centered")
 
+# --- SIDEBAR BRANDING & PROFILE ---
+with st.sidebar:
+    if os.path.exists("Logo.png"):
+        st.image("Logo.png", use_container_width=True)
+    
+    st.markdown("## Dhiraj Malwade")
+    st.markdown("**AI & Data Science Engineer**")
+    
+    st.markdown(
+        """
+        <div style='display: flex; gap: 15px; margin-top: 10px; margin-bottom: 25px;'>
+            <a href='https://www.linkedin.com/in/dhiraj-malwade-6a8385399/' target='_blank'>
+                <img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg' width='35' alt='LinkedIn'>
+            </a>
+            <a href='https://github.com/nemestron/Aegis-Sentinel' target='_blank'>
+                <img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' width='35' alt='GitHub' style='filter: invert(100%);'>
+            </a>
+        </div>
+        """, unsafe_allow_html=True
+    )
+    st.markdown("---")
+    st.markdown("### System Telemetry")
+    st.success("Autonomous Core: ACTIVE")
+    st.info("Cloud Scheduler: AIRBORNE")
+
+# --- MAIN APPLICATION LOGIC ---
 class PDFReport(FPDF):
     def header(self):
         self.set_font("helvetica", "B", 16)
