@@ -35,6 +35,9 @@ with st.sidebar:
             <a href='https://github.com/nemestron/Aegis-Sentinel' target='_blank'>
                 <img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' width='35' alt='GitHub' style='filter: invert(100%);'>
             </a>
+            <a href='https://t.me/aegis_sentinel_feed' target='_blank'>
+                <img src='https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg' width='35' alt='Telegram Channel'>
+            </a>
         </div>
         """, unsafe_allow_html=True
     )
