@@ -2,8 +2,9 @@ name: Hourly Finance Update
 
 on:
   schedule:
-    # Runs at minute 0 past every hour, every day of the week
-    - cron: '0 * * * *'
+    # 30th minute of UTC hours 3 through 13.
+    # This precisely maps to 09:00 AM through 07:00 PM Indian Standard Time (IST), Mon-Fri.
+    - cron: '30 3-13 * * 1-5'
   workflow_dispatch:
 
 jobs:
