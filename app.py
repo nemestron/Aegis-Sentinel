@@ -1,5 +1,5 @@
 """
-Aegis Sentinel - Command Dashboard
+Aegis Sentinel - Command Dashboard (Commodity Edition)
 Author: Dhiraj Malwade
 """
 import streamlit as st
@@ -50,7 +50,7 @@ with st.sidebar:
 class PDFReport(FPDF):
     def header(self):
         self.set_font("helvetica", "B", 16)
-        self.cell(0, 10, "Aegis Sentinel Intelligence Report", align="C", new_x="LMARGIN", new_y="NEXT")
+        self.cell(0, 10, "Aegis Sentinel Commodity Report", align="C", new_x="LMARGIN", new_y="NEXT")
         self.ln(5)
 
     def footer(self):
@@ -72,7 +72,7 @@ def generate_pdf(state_data: dict) -> bytes:
     sources = state_data.get("source_links", [])
 
     pdf.set_font("helvetica", "B", 14)
-    pdf.cell(0, 10, f"Target: {company} ({ticker})", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 10, f"Target Asset: {company} ({ticker})", new_x="LMARGIN", new_y="NEXT")
     pdf.set_font("helvetica", size=12)
     pdf.cell(0, 10, f"Current Price: {price}", new_x="LMARGIN", new_y="NEXT")
     pdf.cell(0, 10, f"24h Change: {change}", new_x="LMARGIN", new_y="NEXT")
@@ -96,8 +96,8 @@ def generate_pdf(state_data: dict) -> bytes:
 
     return bytes(pdf.output())
 
-st.title("Aegis Sentinel Command Dashboard")
-st.markdown("Autonomous Financial Intelligence & Cryptographic Verification System")
+st.title("Aegis Sentinel Commodity Dashboard")
+st.markdown("Autonomous Macro-Finance Intelligence & Cryptographic Verification System")
 
 if "executor" not in st.session_state:
     st.session_state.executor = ThreadPoolExecutor(max_workers=1)
@@ -106,14 +106,19 @@ if "future" not in st.session_state:
 if "result" not in st.session_state:
     st.session_state.result = None
 
-ticker_input = st.text_input("Enter Target Ticker Symbol (e.g., RELIANCE.NS, AAPL, BARC.L):").strip().upper()
+# Constrain inputs to match backend INR conversion logic
+target_map = {
+    "Gold (GC=F)": "GC=F",
+    "Silver (SI=F)": "SI=F",
+    "Copper (HG=F)": "HG=F"
+}
+
+selected_asset = st.selectbox("Select Target Commodity:", list(target_map.keys()))
+ticker_input = target_map[selected_asset]
 
 if st.button("Run Analysis"):
-    if not ticker_input:
-        st.warning("Please enter a valid ticker symbol.")
-    else:
-        st.session_state.result = None
-        st.session_state.future = st.session_state.executor.submit(invoke_graph_autonomous, ticker_input)
+    st.session_state.result = None
+    st.session_state.future = st.session_state.executor.submit(invoke_graph_autonomous, ticker_input)
 
 if st.session_state.future and not st.session_state.future.done():
     with st.status("Acquiring Intelligence & Authenticating... Please wait.", expanded=True) as status:
@@ -133,7 +138,7 @@ if st.session_state.result:
     state = st.session_state.result
     st.success("Intelligence Acquisition Complete.")
 
-    st.subheader(f"Target: {state.get('company_name') or state.get('ticker')}")
+    st.subheader(f"Asset: {state.get('company_name') or state.get('ticker')}")
     col1, col2, col3 = st.columns(3)
     col1.metric("Current Price", state.get("current_price"))
     col2.metric("24h Change", state.get("change_percent"))
@@ -160,7 +165,7 @@ if st.session_state.result:
 
     with col_b:
         if st.button("Send to Telegram"):
-            message = f"*AEGIS INTELLIGENCE: {state.get('company_name') or state.get('ticker')}*\n"
+            message = f"*AEGIS COMMODITY INTELLIGENCE: {state.get('company_name') or state.get('ticker')}*\n"
             message += f"Current Price: {state.get('current_price')}\n"
             message += f"24h Change: {state.get('change_percent')}\n"
             message += f"Authentication: {'VERIFIED' if state.get('verified') else 'UNVERIFIED'}\n\n"
