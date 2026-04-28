@@ -1,10 +1,9 @@
 """
-Watchlist Configuration
+Watchlist Configuration - Commodities
 Author: Dhiraj Malwade
 """
 WATCHLIST = [
-    {"symbol": "^NSEI", "name": "NIFTY 50"},
-    {"symbol": "RELIANCE.NS", "name": "Reliance Industries"},
-    {"symbol": "AAPL", "name": "Apple"},
-    {"symbol": "BARC.L", "name": "Barclays"}
+    {"symbol": "GC=F", "name": "Gold"},
+    {"symbol": "SI=F", "name": "Silver"},
+    {"symbol": "HG=F", "name": "Copper"}
 ]

@@ -8,7 +8,8 @@ def _execute_news_fetch(query: str, max_results: int) -> list[dict]:
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     
     with DDGS(headers=headers, timeout=20) as ddgs:
-        news_items = ddgs.news(query, max_results=max_results)
+        # timelimit='d' ensures recent context, passing query constraints for the hour
+        news_items = ddgs.news(query, timelimit='d', max_results=max_results)
         if news_items:
             for item in news_items:
                 title = item.get('title', 'No Title')
@@ -22,7 +23,7 @@ def _execute_news_fetch(query: str, max_results: int) -> list[dict]:
                 })
     return results
 
-def fetch_news(query: str, max_results: int = 3) -> list[dict]:
+def fetch_news(query: str, max_results: int = 2) -> list[dict]:
     """Fetches live news, catching rate limits gracefully."""
     try:
         return _execute_news_fetch(query, max_results)
@@ -30,8 +31,8 @@ def fetch_news(query: str, max_results: int = 3) -> list[dict]:
         log.warning(f"News fetch rate limited or blocked. Proceeding with partial intelligence. Details: {e}")
         return []
 
-def get_market_headlines(query: str = "global financial markets breaking news", max_results: int = 3) -> list[dict]:
-    """Fetches top global finance macro headlines."""
+def get_market_headlines(query: str = "global finance business news past hour", max_results: int = 2) -> list[dict]:
+    """Fetches exactly 2 top global finance macro headlines from the recent cycle."""
     try:
         raw_news = _execute_news_fetch(query, max_results)
         return [{"title": n["title"], "url": n["url"]} for n in raw_news]

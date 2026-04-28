@@ -1,5 +1,5 @@
 """
-Hourly Scheduler and Consolidated Reporter
+Hourly Scheduler and Consolidated Reporter - Commodity Edition
 Author: Dhiraj Malwade
 """
 import os
@@ -17,7 +17,6 @@ from src.utils.logger import SecretRedacter
 
 load_dotenv()
 
-# Configure dedicated scheduler logger
 s_logger = logging.getLogger("aegis_scheduler")
 s_logger.setLevel(logging.INFO)
 if not s_logger.handlers:
@@ -33,20 +32,19 @@ if not s_logger.handlers:
     s_logger.addHandler(console)
 
 def generate_hourly_brief() -> str:
-    # Suppress individual graph deliveries to prevent spam
     os.environ["AEGIS_SUPPRESS_DELIVERY"] = "true"
     
     ist = pytz.timezone('Asia/Kolkata')
     now = datetime.now(ist).strftime('%Y-%m-%d %H:%M %Z')
     
-    message = f"*AEGIS HOURLY CONSOLIDATED REPORT*\nTimestamp: {now}\n\n"
-    message += "*WATCHLIST PULSE*\n"
+    message = f"*AEGIS HOURLY COMMODITY & FINANCE PULSE*\nTimestamp: {now}\n\n"
+    message += "*HOURLY COMMODITY PRICES (INR)*\n"
     message += "---\n\n"
     
     for item in WATCHLIST:
         symbol = item["symbol"]
         name = item["name"]
-        s_logger.info(f"Processing watchlist target: {name} ({symbol})")
+        s_logger.info(f"Processing commodity target: {name} ({symbol})")
         
         try:
             state = invoke_graph_autonomous(symbol)
@@ -55,16 +53,16 @@ def generate_hourly_brief() -> str:
             brief = state.get("final_brief", "No brief generated.")
             verified = "VERIFIED" if state.get("verified") else "UNVERIFIED"
             
-            message += f"*{name} ({symbol})* - {price} ({change})\n"
+            message += f"*{name}* - {price} ({change})\n"
             message += f"Auth: {verified}\n"
             message += f"{brief}\n\n"
         except Exception as e:
             s_logger.error(f"Failed to process {symbol}: {e}")
-            message += f"*{name} ({symbol})*\nStatus: Acquisition Failed.\n\n"
+            message += f"*{name}*\nStatus: Acquisition Failed.\n\n"
 
-    message += "*GLOBAL MACRO HEADLINES*\n"
+    message += "*LATEST FINANCE NEWS (PAST HOUR)*\n"
     message += "---\n"
-    headlines = get_market_headlines()
+    headlines = get_market_headlines("global finance business news past hour", max_results=2)
     if headlines:
         for h in headlines:
             title = h.get("title", "No Title")
