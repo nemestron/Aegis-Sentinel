@@ -81,6 +81,7 @@ The system operates 24/7 via GitHub Actions automation, delivering hourly consol
 
 ## 🏗️ System Architecture
 
+<img width="1536" height="1024" alt="Aegis Architecuture" src="https://github.com/user-attachments/assets/9b4ce596-d37c-4e20-a3f0-ad852fbfe9c8" />
 
 
 *Figure 1: Complete system architecture showing data flow from ingestion to delivery*
